@@ -1,0 +1,42 @@
+id: claudecode
+schema_version: 1
+display_name: Claude Code
+description: Runs local Claude Code through the Agent Client Protocol (ACP) for Prism remote conversations.
+icon_url: https://registry.npmmirror.com/@lobehub/icons-static-avatar/latest/files/avatars/claudecode.webp
+icon_svg_url: https://registry.npmmirror.com/@lobehub/icons-static-svg/latest/files/icons/claudecode.svg
+version: 0.1.2
+plugin_protocol_version: "4"
+min_hub_version: 0.1.0
+integration_mode: protocol-native
+transport: process
+mode: acp
+runtime_modes: [acp]
+default_runtime_mode: acp
+runtime_controls:
+  acp: {}
+runtime_operations:
+  acp:
+    rename: unsupported
+    pin: unsupported
+    archive: unsupported
+    delete: unsupported
+managed_launch: true
+runtime_dependencies:
+  node: ">=22.0.0 <23.0.0"
+command: ["${runtime.node}", "--max-old-space-size=512", "dist/index.js"]
+capabilities:
+  native_visible_input: false
+  native_visible_output: false
+  can_attach_session: true
+  can_start_session_with_message: true
+  can_open_draft: true
+  can_list_sessions: true
+  can_read_history: true
+  can_interrupt: true
+  can_approval: true
+  can_forward_sync: true
+  can_reverse_sync: false
+  can_plugin_wide_watch: false
+  can_wait_run: true
+  can_read_status: true
+  can_control_session: true
