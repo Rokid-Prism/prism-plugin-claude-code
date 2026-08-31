@@ -2,3 +2,23 @@ node_modules/
 release/
 *.tgz
 
+# TypeScript build and test artifacts
+dist/
+*.tsbuildinfo
+coverage/
+test-results/
+.cache/
+
+# Local runtime and tooling artifacts
+.claude/
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.log
