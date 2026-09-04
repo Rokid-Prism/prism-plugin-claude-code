@@ -26,19 +26,21 @@ jobs:
     runs-on: ${{ matrix.runner }}
     env:
       PRISM_PLATFORM: ${{ matrix.target }}
-      npm_config_registry: https://registry.npmmirror.com/
+      # The lockfile pins every tarball to registry.npmjs.org. npm would
+      # otherwise rewrite those hosts to the configured registry, and the
+      # npmmirror CDN currently 404s on @rokid-prism SDK tarballs.
+      npm_config_replace_registry_host: never
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22.23.1
-          registry-url: https://registry.npmmirror.com/
           cache: npm
       - name: Require a reproducible SDK lockfile
         shell: bash
         run: test -f package-lock.json
       - name: Install locked dependencies
-        run: npm ci --registry=https://registry.npmmirror.com/
+        run: npm ci
       - name: Build and test
         run: |
           npm run build --if-present
@@ -49,7 +51,7 @@ jobs:
       - name: Protocol probe on the target runner
         run: node scripts/probe.mjs
       - name: Keep only runtime dependencies
-        run: npm prune --omit=dev --registry=https://registry.npmmirror.com/
+        run: npm prune --omit=dev
       - name: Stage target package
         shell: bash
         run: |
