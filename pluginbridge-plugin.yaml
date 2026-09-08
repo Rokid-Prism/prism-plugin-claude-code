@@ -4,7 +4,7 @@ display_name: Claude Code
 description: Runs local Claude Code through the Claude Agent SDK for Prism remote conversations.
 icon_url: https://registry.npmmirror.com/@lobehub/icons-static-avatar/latest/files/avatars/claudecode.webp
 icon_svg_url: https://registry.npmmirror.com/@lobehub/icons-static-svg/latest/files/icons/claudecode.svg
-version: 0.2.0
+version: 0.2.1
 plugin_protocol_version: "4"
 min_hub_version: 0.1.0
 integration_mode: protocol-native

@@ -272,6 +272,29 @@ test("attach replays the SDK transcript as user-anchored turns with tool steps",
   await adapter.close();
 });
 
+test("conversation.select control is acknowledged without local side effects", async () => {
+  const runtime = fakeRuntime();
+  const adapter = new ClaudeCodeAdapter(runtime);
+  const session = await adapter.attachSession({
+    PluginID: "claudecode",
+    PrismConversationID: "conversation-select",
+    NativeSessionID: "sdk-test-session",
+    NativeThreadID: "sdk-test-session",
+    Cwd: process.cwd(),
+    SourceDevice: "test",
+    Metadata: {},
+  });
+  const result = await adapter.controlSession({
+    session: sessionFixture("sdk-test-session"),
+    action: "conversation.select",
+    metadata: { source_device: "remote-selection" },
+  });
+  assert.equal(result.ok, true);
+  assert.equal(result.thread_id, "sdk-test-session");
+  assert.deepEqual(runtime.calls.slice(1), []); // no prompt/cancel/config side effects beyond the attach load
+  await adapter.close();
+});
+
 test("approval actions map to allow once, allow always, and deny", async () => {
   const adapter = new ClaudeCodeAdapter(fakeRuntime());
   const session = await adapter.attachSession({

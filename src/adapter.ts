@@ -356,6 +356,13 @@ export class ClaudeCodeAdapter implements PluginAdapter {
   }
 
   async controlSession(req: ControlSessionRequest): Promise<ControlSessionResult> {
+    if (req.action.toLowerCase().replace(/_/g, ".") === "conversation.select") {
+      // Remote selection is pure browsing context for the SDK runtime: the
+      // conversation has no desktop window to foreground, so acknowledge
+      // without a local side effect.
+      const id = sessionID(req.session);
+      return { ok: true, action: req.action, thread_id: id, details: this.controls(id), details_confirmed: true };
+    }
     const state = await this.ensureSession(req.session); await this.applyControl(state.id, req.action, req.target);
     const details = this.controls(state.id); this.publish(state, event("desktop.state.changed", "completed", "Claude Code session controls updated", { detail_snapshot: details }));
     return { ok: true, action: req.action, thread_id: state.id, details };
