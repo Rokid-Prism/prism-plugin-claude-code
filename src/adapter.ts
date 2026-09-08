@@ -7,7 +7,7 @@ import type {
   DraftOpenResult, InboundMessage, NativeSession, NativeSessionHint, PluginAdapter,
   PluginEvent, RunStatus, SendReceipt, StartDraftWithMessageRequest,
   StartSessionWithMessageRequest, StartSessionWithMessageResult, VisibilityResult,
-} from "@rokid/pluginbridge-plugin-sdk";
+} from "@rokid-prism/pluginbridge-plugin-sdk";
 import { ClaudeAcpRuntime, type AcpNotification, type AcpPermissionRequest, fingerprint, newOpaqueID } from "./acp-runtime.js";
 
 const PLUGIN_ID = "claudecode";

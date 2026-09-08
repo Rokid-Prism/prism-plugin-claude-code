@@ -1,4 +1,4 @@
-import { serve, checkProtocolVersion } from "@rokid/pluginbridge-plugin-sdk";
+import { serve, checkProtocolVersion } from "@rokid-prism/pluginbridge-plugin-sdk";
 import { ClaudeCodeAdapter } from "./adapter.js";
 
 checkProtocolVersion();
