@@ -9,7 +9,6 @@ plugin_protocol_version: "4"
 min_hub_version: 0.1.0
 integration_mode: protocol-native
 transport: process
-mode: sdk
 runtime_modes: [sdk]
 default_runtime_mode: sdk
 runtime_controls:
